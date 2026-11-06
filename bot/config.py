@@ -73,4 +73,5 @@ REBALANCE_THRESHOLD = 0.02
 
 HISTORY_PERIOD = "2y"
 
-GEMINI_MODEL = os.getenv("GEMINI_MODEL") or "gemini-flash-latest"
+# Vide = sélection automatique du meilleur modèle Flash disponible pour la clé
+GEMINI_MODEL = os.getenv("GEMINI_MODEL") or None

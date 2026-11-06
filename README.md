@@ -45,7 +45,7 @@ Dans le dépôt : **Settings → Secrets and variables → Actions → New repos
 - `DATABASE_URL` : chaîne de connexion Neon
 - `GEMINI_API_KEY` : clé Google AI Studio
 
-Facultatif, dans l'onglet *Variables* : `GEMINI_MODEL` (par défaut `gemini-flash-latest`).
+Facultatif, dans l'onglet *Variables* : `GEMINI_MODEL` pour imposer un modèle (ex. `gemini-2.5-pro`). Sans cette variable, le bot choisit automatiquement le modèle Flash stable le plus récent disponible pour ta clé. Le modèle utilisé est indiqué dans le log de chaque run.
 
 ### 3. Premier run
 Onglet **Actions → Daily run → Run workflow**. Le bot crée les tables et programme les premiers ordres, qui seront exécutés au run suivant. Ensuite, il tourne tout seul chaque soir.

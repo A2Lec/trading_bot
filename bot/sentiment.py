@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pydantic import BaseModel, Field
 
 from .config import Asset
-from .llm import Gemini
+from .llm import Gemini, GeminiUnavailable
 from .news import headlines
 
 log = logging.getLogger(__name__)
@@ -52,8 +52,10 @@ def analyze(llm: Gemini, assets: list[Asset], batch_size: int = 10) -> dict[str,
         prompt = "Analyse les actifs suivants. Renvoie un élément par actif.\n\n" + "\n\n".join(blocks)
         try:
             out: _Batch = llm.json(prompt, _Batch, system=SYSTEM)
-        except Exception as e:  # noqa: BLE001
-            log.error("Analyse de sentiment échouée pour un lot : %s", e)
+        except GeminiUnavailable as e:
+            log.error("Analyse de sentiment interrompue : %s", e)
+            if llm.error:  # erreur définitive : inutile de tenter les lots suivants
+                break
             continue
         for it in out.items:
             if it.symbol in news:
