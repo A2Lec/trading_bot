@@ -34,6 +34,8 @@ export default async function StrategyPage({ params }: { params: Promise<{ id: s
       <h1>{s.name}</h1>
       <p className="sub">{s.description}</p>
 
+      <div className="split">
+      <section>
       <div className="card" style={{ marginTop: 16 }}>
         <div className="hero num">{eur(m?.equity ?? s.initial_capital)}</div>
         <p className={`num ${tone(m?.ret)}`}>{pct(m?.ret ?? 0, 2)} <span className="muted">depuis le début ({m?.days ?? 0} j)</span></p>
@@ -48,7 +50,9 @@ export default async function StrategyPage({ params }: { params: Promise<{ id: s
         <div className="card kpi"><div className="label">Drawdown max</div><div className="value num">{pct(m?.maxDD ?? 0, 1, false)}</div></div>
         <div className="card kpi"><div className="label">Cash</div><div className="value num">{eur(s.cash_eur)}</div></div>
       </div>
+      </section>
 
+      <section>
       <h2>Positions ({positions.length})</h2>
       {positions.length ? (
         <div className="list">
@@ -58,7 +62,7 @@ export default async function StrategyPage({ params }: { params: Promise<{ id: s
             return (
               <div key={p.symbol} className="row">
                 <div>
-                  <b>{p.symbol}</b> <span className="sub">{p.name}</span>
+                  <div className="ellip"><b>{p.symbol}</b> <span className="sub">{p.name}</span></div>
                   <div className="sub num">{num(p.quantity, 4)} · PRU {eur(p.avg_cost_eur, 2)} · depuis le {dateFr(p.opened_at)}</div>
                 </div>
                 <div className="num" style={{ textAlign: "right" }}>
@@ -72,6 +76,11 @@ export default async function StrategyPage({ params }: { params: Promise<{ id: s
       ) : (
         <div className="card sub">Aucune position{invested === 0 ? " : portefeuille 100 % cash." : "."}</div>
       )}
+      </section>
+      </div>
+
+      <div className={pending.length || journal.length ? "split even" : ""}>
+      <section>
 
       {pending.length > 0 && (
         <>
@@ -92,8 +101,13 @@ export default async function StrategyPage({ params }: { params: Promise<{ id: s
         </>
       )}
 
+      </section>
+
+      <section>
       <h2>Transactions</h2>
       {filled.length ? <div className="list">{filled.map((o) => <OrderItem key={o.id} o={o} />)}</div> : <div className="card sub">Aucune transaction pour l&apos;instant.</div>}
+      </section>
+      </div>
     </main>
   );
 }

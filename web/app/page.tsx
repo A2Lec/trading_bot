@@ -50,18 +50,22 @@ export default async function Home() {
         <p className={`num ${tone(totalEquity / totalCapital - 1)}`}>{pct(totalEquity / totalCapital - 1, 2)} <span className="muted">sur {eur(totalCapital)} investis</span></p>
       </div>
 
+      <div className="split">
+      <section>
       <h2>Performance comparée</h2>
       <div className="card">
         <LineChart data={table} series={series} mode="pct" />
       </div>
+      </section>
 
+      <section>
       <h2>Classement</h2>
       <div className="list">
         {rows.map(({ s, m }, i) => (
           <Link key={s.id} href={`/s/${s.id}`} className="strat">
             <span className={`swatch ${s.id === BENCHMARK_ID ? "ref" : ""}`} style={{ background: s.id === BENCHMARK_ID ? undefined : colors[s.id] }} />
-            <div>
-              <div className="name"><span className="rank">{i + 1}</span>{s.name}</div>
+            <div style={{ minWidth: 0 }}>
+              <div className="name ellip"><span className="rank">{i + 1}</span>{s.name}</div>
               <div className="sub num">
                 {eur(m?.equity ?? s.initial_capital)} · investi {pct(m?.invested ?? 0, 0, false)}
                 {bench && s.id !== BENCHMARK_ID && m ? <> · <span className={tone(m.ret - bench.ret)}>{pct(m.ret - bench.ret)} vs bench.</span></> : null}
@@ -73,6 +77,8 @@ export default async function Home() {
             </div>
           </Link>
         ))}
+      </div>
+      </section>
       </div>
     </main>
   );

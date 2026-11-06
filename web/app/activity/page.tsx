@@ -13,11 +13,15 @@ export default async function Activity() {
       <h1>Activité</h1>
       <p className="sub">Derniers ordres de toutes les stratégies</p>
 
+      <div className="split">
+      <section>
       <h2>Ordres</h2>
       {orders.length ? (
         <div className="list">{orders.map((o) => <OrderItem key={o.id} o={o} strategyName={names[o.strategy_id]} />)}</div>
       ) : <div className="card sub">Aucun ordre.</div>}
 
+      </section>
+      <section>
       <h2>Exécutions du bot</h2>
       <div className="list">
         {runs.map((r) => {
@@ -35,6 +39,8 @@ export default async function Activity() {
             </details>
           );
         })}
+      </div>
+      </section>
       </div>
     </main>
   );

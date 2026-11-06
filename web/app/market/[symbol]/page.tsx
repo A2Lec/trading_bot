@@ -20,6 +20,8 @@ export default async function AssetPage({ params }: { params: Promise<{ symbol: 
       <Link href="/market" className="sub">← Marché</Link>
       <h1>{a.name}</h1>
       <p className="sub">{a.symbol} · {a.region} · {a.currency}</p>
+      <div className="split">
+      <section>
       <div className="card" style={{ marginTop: 16 }}>
         <div className="hero num">{num(a.close)} <span className="muted" style={{ fontSize: 16 }}>{a.currency}</span></div>
         <p className={`num ${tone(a.ret_1d)}`}>{pct(a.ret_1d, 2)} <span className="muted">aujourd&apos;hui</span></p>
@@ -27,7 +29,9 @@ export default async function AssetPage({ params }: { params: Promise<{ symbol: 
           <LineChart data={prices.map((p) => ({ date: p.date, close: p.close }))} series={[{ key: "close", name: a.name, color: "var(--series-1)" }]} mode="value" unit={a.currency} />
         </div>
       </div>
-      <div className="grid2 grid4" style={{ marginTop: 10 }}>
+      </section>
+      <section>
+      <div className="grid2" style={{ marginTop: 16 }}>
         {stats.map(([l, v]) => (
           <div key={l} className="card kpi"><div className="label">{l}</div><div className={`value num ${tone(v)}`}>{pct(v)}</div></div>
         ))}
@@ -54,6 +58,8 @@ export default async function AssetPage({ params }: { params: Promise<{ symbol: 
           </div>
         </>
       )}
+      </section>
+      </div>
     </main>
   );
 }

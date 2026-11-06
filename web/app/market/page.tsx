@@ -22,22 +22,23 @@ export default async function Market() {
       {groups.map((g) => (
         <section key={g.k}>
           <h2>{CLASSES[g.k]}</h2>
-          <div className="list">
+          <div className="list cols three">
             {g.items.map((r) => (
               <Link key={r.symbol} href={`/market/${encodeURIComponent(r.symbol)}`}>
                 <div className="row">
-                  <div style={{ minWidth: 0 }}>
-                    <b>{r.symbol}</b> <span className="sub">{r.name}</span>
-                    <div style={{ marginTop: 4, display: "flex", gap: 6, flexWrap: "wrap" }}>
-                      <span className={`pill ${r.above_sma200 ? "buy" : "sell"}`}>{r.above_sma200 ? "▲ > MM200" : "▼ < MM200"}</span>
-                      {r.rsi14 != null && <span className="pill">RSI {r.rsi14.toFixed(0)}</span>}
-                      <Score v={r.score} />
-                    </div>
+                  <div>
+                    <div className="ellip"><b>{r.symbol}</b></div>
+                    <div className="sub ellip">{r.name}</div>
                   </div>
-                  <div className="num" style={{ textAlign: "right", flex: "none" }}>
+                  <div className="num" style={{ textAlign: "right" }}>
                     <div>{num(r.close)} <span className="muted" style={{ fontSize: 11 }}>{r.currency}</span></div>
                     <div className="sub"><span className={tone(r.ret_1d)}>{pct(r.ret_1d)}</span> · <span className={tone(r.ret_1m)}>{pct(r.ret_1m, 0)} 1m</span></div>
                   </div>
+                </div>
+                <div className="pills">
+                  <span className={`pill ${r.above_sma200 ? "buy" : "sell"}`}>{r.above_sma200 ? "▲ > MM200" : "▼ < MM200"}</span>
+                  {r.rsi14 != null && <span className="pill">RSI {r.rsi14.toFixed(0)}</span>}
+                  <Score v={r.score} />
                 </div>
               </Link>
             ))}
