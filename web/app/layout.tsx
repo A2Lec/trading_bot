@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import { Nav } from "@/components/Nav";
+import { THEME_BG, THEME_COOKIE, parseTheme } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,21 +10,28 @@ export const metadata: Metadata = {
   appleWebApp: { capable: true, title: "Trading", statusBarStyle: "black-translucent" },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4f4f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#111110" },
-  ],
-};
+// Couleur de la barre d'état : suit le thème choisi (cookie), sinon celui du téléphone
+export async function generateViewport(): Promise<Viewport> {
+  const theme = parseTheme((await cookies()).get(THEME_COOKIE)?.value);
+  return {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+    themeColor: theme === "system"
+      ? [
+          { media: "(prefers-color-scheme: light)", color: THEME_BG.light },
+          { media: "(prefers-color-scheme: dark)", color: THEME_BG.dark },
+        ]
+      : THEME_BG[theme],
+  };
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = parseTheme((await cookies()).get(THEME_COOKIE)?.value);
   return (
-    <html lang="fr">
+    <html lang="fr" data-theme={theme === "system" ? undefined : theme}>
       <body>
-        <Nav />
+        <Nav theme={theme} />
         {children}
       </body>
     </html>

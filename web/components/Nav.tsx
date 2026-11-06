@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { Theme } from "@/lib/theme";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const items = [
   { href: "/", label: "Stratégies", d: "M3 17l6-6 4 4 8-8M15 7h6v6" },
@@ -9,7 +11,7 @@ const items = [
   { href: "/activity", label: "Activité", d: "M12 8v4l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
 ];
 
-export function Nav() {
+export function Nav({ theme }: { theme: Theme }) {
   const path = usePathname();
   if (path === "/login") return null;
   return (
@@ -25,6 +27,7 @@ export function Nav() {
           </Link>
         );
       })}
+      <ThemeToggle initial={theme} />
     </nav>
   );
 }
