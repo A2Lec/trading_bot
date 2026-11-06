@@ -1,0 +1,7 @@
+yfinance>=0.2.60
+pandas>=2.2
+numpy>=1.26
+sqlalchemy>=2.0
+psycopg[binary]>=3.2
+google-genai>=1.0
+pydantic>=2.7
