@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Logo } from "@/components/Logo";
 import { COOKIE, tokenFor } from "@/lib/auth";
 
 async function login(formData: FormData) {
@@ -17,6 +18,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <div className="login">
       <form action={login}>
+        <Logo size={72} />
         <h1>Paper Trading</h1>
         <p className="sub">Accès au tableau de bord</p>
         <input type="password" name="password" placeholder="Mot de passe" autoFocus required autoComplete="current-password" />

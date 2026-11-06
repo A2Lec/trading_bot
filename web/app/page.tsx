@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LineChart, type Series } from "@/components/LineChart";
+import { Logo } from "@/components/Logo";
 import { RunStatus } from "@/components/RunStatus";
 import { BENCHMARK_ID, colorMap } from "@/lib/colors";
 import { computeMetrics, getEquity, getRuns, getStrategies } from "@/lib/data";
@@ -12,7 +13,7 @@ export default async function Home() {
   if (!strategies.length) {
     return (
       <main>
-        <h1>Stratégies</h1>
+        <h1 className="brand"><Logo />Stratégies</h1>
         <div className="card empty">Aucune donnée pour l&apos;instant. Lance le workflow GitHub « Daily run » pour initialiser le bot.</div>
       </main>
     );
@@ -40,7 +41,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Stratégies</h1>
+      <h1 className="brand"><Logo />Stratégies</h1>
       <RunStatus run={runs[0]} />
 
       <div className="card" style={{ marginTop: 16 }}>

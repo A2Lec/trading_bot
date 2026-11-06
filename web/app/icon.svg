@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2a4a"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <linearGradient id="up" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5ee39a"/>
+      <stop offset="1" stop-color="#1fae63"/>
+    </linearGradient>
+    <linearGradient id="dn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff8a80"/>
+      <stop offset="1" stop-color="#e0483f"/>
+    </linearGradient>
+    <linearGradient id="ln" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5aa2ff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#8cc2ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+
+  <g stroke-linecap="round">
+    <line x1="152" y1="236" x2="152" y2="384" stroke="url(#dn)" stroke-width="12"/>
+    <rect x="120" y="262" width="64" height="92" rx="14" fill="url(#dn)"/>
+    <line x1="256" y1="184" x2="256" y2="346" stroke="url(#up)" stroke-width="12"/>
+    <rect x="224" y="212" width="64" height="104" rx="14" fill="url(#up)"/>
+    <line x1="360" y1="104" x2="360" y2="300" stroke="url(#up)" stroke-width="12"/>
+    <rect x="328" y="130" width="64" height="140" rx="14" fill="url(#up)"/>
+  </g>
+  <polyline points="88,420 200,372 300,388 430,252" fill="none" stroke="url(#ln)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="430" cy="252" r="17" fill="#8cc2ff" stroke="#0b1220" stroke-width="7"/>
+</svg>
